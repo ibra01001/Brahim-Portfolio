@@ -21,7 +21,7 @@ services:
       - key: LOG_CHANNEL
         value: stderr
       - key: LOG_LEVEL
-        value: debug
+        value: error
       - key: DB_CONNECTION
         value: pgsql
       - key: DATABASE_URL
@@ -43,6 +43,12 @@ services:
       - key: GEMINI_MODEL
         value: gemini-2.5-flash
       - key: CLOUDINARY_URL
+        sync: false
+      - key: CLOUDINARY_CLOUD_NAME
+        sync: false
+      - key: CLOUDINARY_API_KEY
+        sync: false
+      - key: CLOUDINARY_API_SECRET
         sync: false
       # Add if you use mail:
       # - key: MAIL_MAILER
