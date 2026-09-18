@@ -30,6 +30,7 @@ class PortfolioDataSeeder extends Seeder
                 'name'     => 'BRAHIM REMILI',
                 'image'    => 'https://res.cloudinary.com/deveventhub/image/upload/v1789744789/profile/ox8jodicc6eez8tn7wap.jpg',
                 'title'    => 'Software Developer',
+                'bio'      => 'Passionate developer creating amazing web experiences with modern technologies. I love turning ideas into beautiful, functional applications.',
                 'github'   => 'https://github.com/ibra01001',
                 'linkedin' => 'https://www.linkedin.com/in/brahim-mohamed-mokhtar-remili-15b907370/',
             ]
