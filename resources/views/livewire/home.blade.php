@@ -63,9 +63,7 @@
                         class="inline-flex items-center px-6 py-3.5 bg-white border-2 border-[#1A1A1A] text-[#1A1A1A] font-bold rounded-lg shadow-[4px_4px_0px_0px_#1A1A1A] hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px] hover:bg-[#1A1A1A] hover:text-white transition-all transform active:scale-95"
                         style="font-family: 'Space Grotesk', sans-serif;">
                         About Me
-                        <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                        </svg>
+
                     </a>
 
 
