@@ -120,7 +120,7 @@
                                                     <!-- Logo frame -->
                                                     <div
                                                         class="w-24 h-24 bg-[#F5F3EF] border-2 border-[#1A1A1A] rounded-2xl p-3 shadow-[4px_4px_0px_0px_#FF6B55] flex items-center justify-center overflow-hidden transition-transform group-hover:rotate-3">
-                                                        <img src="{{ asset('storage/' . $experience->company_logo) }}"
+                                                        <img src="{{ image_url($experience->company_logo) }}"
                                                             alt="{{ $experience->company }} logo"
                                                             class="max-w-full max-h-full object-contain filter group-hover:scale-110 transition-transform duration-300">
                                                     </div>

@@ -41,7 +41,7 @@
                                 @if ($newImage)
                                     <img class="h-full w-full object-cover" src="{{ $newImage->temporaryUrl() }}" alt="New profile photo">
                                 @elseif ($profile->image)
-                                    <img class="h-full w-full object-cover" src="{{ asset('storage/' . $profile->image) }}" alt="Current profile photo">
+                                    <img class="h-full w-full object-cover" src="{{ image_url($profile->image) }}" alt="Current profile photo">
                                 @else
                                     <div class="h-full w-full flex items-center justify-center text-[#1A1A1A]">
                                         <svg class="h-10 w-10 opacity-30" fill="currentColor" viewBox="0 0 24 24">

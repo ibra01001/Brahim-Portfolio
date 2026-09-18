@@ -72,7 +72,7 @@
                             </div>
                         @elseif ($project->image)
                             <div class="mx-auto h-32 w-48 relative border-2 border-[#1A1A1A] rounded overflow-hidden">
-                                <img src="{{ asset('storage/' . $project->image) }}" class="h-full w-full object-cover"
+                                <img src="{{ image_url($project->image) }}" class="h-full w-full object-cover"
                                     alt="Current">
                                 <div
                                     class="absolute bottom-0 inset-x-0 bg-[#1A1A1A] bg-opacity-80 text-white text-[10px] py-1 font-bold">

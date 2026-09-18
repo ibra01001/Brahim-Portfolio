@@ -29,7 +29,7 @@
             <!-- Project Image Section -->
             <div class="relative h-[400px] md:h-[500px] border-b-4 border-[#1A1A1A] bg-[#F5F3EF] overflow-hidden group">
                 @if ($project->image)
-                    <img src="{{ asset('storage/' . $project->image) }}" alt="{{ $project->title }}"
+                    <img src="{{ image_url($project->image) }}" alt="{{ $project->title }}"
                         class="w-full h-full object-cover filter grayscale group-hover:grayscale-0 transition-all duration-500 ease-in-out">
                 @else
                     <div class="w-full h-full flex flex-col items-center justify-center bg-gray-100">

@@ -67,7 +67,7 @@
                                 <div
                                     class="flex-shrink-0 h-12 w-12 border-2 border-[#1A1A1A] rounded-md overflow-hidden bg-gray-100">
                                     @if($project->image)
-                                        <img class="h-full w-full object-cover" src="{{ asset('storage/' . $project->image) }}"
+                                        <img class="h-full w-full object-cover" src="{{ image_url($project->image) }}"
                                             alt="">
                                     @else
                                         <div

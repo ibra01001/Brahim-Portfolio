@@ -113,7 +113,7 @@
 
                         <!-- Main image container -->
                         <div class="relative bg-white border-4 border-[#1A1A1A] p-2">
-                            <img src="{{ $profile->image ? asset('storage/' . $profile->image) : 'https://via.placeholder.com/400x500/F5F3EF/1A1A1A?text=Your+Photo' }}"
+                            <img src="{{ image_url($profile->image, 'https://via.placeholder.com/400x500/F5F3EF/1A1A1A?text=Your+Photo') }}"
                                 alt="{{ $profile->name }}" class="w-full max-w-md h-auto object-cover">
                         </div>
 

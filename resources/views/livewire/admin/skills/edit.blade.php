@@ -47,7 +47,7 @@
                             </div>
                         @elseif($skill->image)
                             <div class="mx-auto h-20 w-20 relative">
-                                <img src="{{ asset('storage/' . $skill->image) }}" class="h-20 w-20 object-contain mx-auto"
+                                <img src="{{ image_url($skill->image) }}" class="h-20 w-20 object-contain mx-auto"
                                     alt="Current Image">
                                 <span
                                     class="absolute bottom-0 right-0 bg-white text-xs border border-[#1A1A1A] px-1 rounded">Current</span>

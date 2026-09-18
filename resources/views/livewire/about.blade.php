@@ -621,7 +621,7 @@
                                             <!-- Image -->
                                             <div class="relative w-full h-full flex items-center justify-center p-4">
                                                 @if($skill->image)
-                                                    <img src="{{ asset('storage/' . $skill->image) }}" alt="{{ $skill->name }}"
+                                                    <img src="{{ image_url($skill->image) }}" alt="{{ $skill->name }}"
                                                         class="max-w-full max-h-full object-contain group-hover:scale-110 transition-transform duration-300 drop-shadow-sm">
                                                 @else
                                                     <span

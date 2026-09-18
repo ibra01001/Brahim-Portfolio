@@ -37,7 +37,7 @@ class Create extends Component
     {
         $this->validate();
 
-        $imagePath = $this->image ? $this->image->store('projects', 'public') : null;
+        $imagePath = $this->image ? \App\Services\ImageStorageService::upload($this->image, 'projects') : null;
 
         Project::create([
             'title' => $this->title,

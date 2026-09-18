@@ -7,7 +7,7 @@ use Livewire\Component;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Validate;
 use Livewire\WithFileUploads;
-use Illuminate\Support\Facades\Storage;
+use App\Services\ImageStorageService;
 
 #[Layout('livewire.layout.admin')]
 class Edit extends Component
@@ -58,9 +58,9 @@ class Edit extends Component
 
         if ($this->newImage) {
             if ($this->profile->image) {
-                Storage::delete($this->profile->image);
+                ImageStorageService::delete($this->profile->image);
             }
-            $imagePath = $this->newImage->store('profile', 'public');
+            $imagePath = ImageStorageService::upload($this->newImage, 'profile');
         }
 
         $this->profile->fill([

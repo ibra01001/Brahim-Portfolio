@@ -47,7 +47,7 @@ class Create extends Component
 
         $imagePath = null;
         if ($this->company_logo) {
-            $imagePath = $this->company_logo->store('experiences', 'public');
+            $imagePath = \App\Services\ImageStorageService::upload($this->company_logo, 'experiences');
         }
 
         // Assuming there is only one profile for now, or get the first one

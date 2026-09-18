@@ -76,7 +76,7 @@
                                     <div
                                         class="relative h-60 border-b-2 border-[#1A1A1A] bg-[#F5F3EF] overflow-hidden group-hover:bg-[#FF6B55]/10 transition-colors">
                                         @if ($project->image)
-                                            <img src="{{ asset('storage/' . $project->image) }}" alt="{{ $project->title }}"
+                                            <img src="{{ image_url($project->image) }}" alt="{{ $project->title }}"
                                                 class="w-full h-full object-cover filter grayscale group-hover:grayscale-0 transition-all duration-300"
                                                 loading="lazy">
                                         @else

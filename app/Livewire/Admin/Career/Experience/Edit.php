@@ -73,9 +73,9 @@ class Edit extends Component
 
         if ($this->company_logo) {
             if ($this->experience->company_logo) {
-                Storage::disk('public')->delete($this->experience->company_logo);
+                \App\Services\ImageStorageService::delete($this->experience->company_logo);
             }
-            $data['company_logo'] = $this->company_logo->store('experiences', 'public');
+            $data['company_logo'] = \App\Services\ImageStorageService::upload($this->company_logo, 'experiences');
         }
 
         $this->experience->update($data);

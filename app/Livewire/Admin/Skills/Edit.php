@@ -54,7 +54,10 @@ class Edit extends Component
 
         $imagePath = $this->skill->image;
         if ($this->newImage) {
-            $imagePath = $this->newImage->store('skills', 'public');
+            if ($this->skill->image) {
+                \App\Services\ImageStorageService::delete($this->skill->image);
+            }
+            $imagePath = \App\Services\ImageStorageService::upload($this->newImage, 'skills');
         }
 
         $this->skill->update([

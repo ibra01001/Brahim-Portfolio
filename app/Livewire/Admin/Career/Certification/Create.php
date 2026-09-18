@@ -42,7 +42,7 @@ class Create extends Component
 
         $pdfPath = null;
         if ($this->pdf) {
-            $pdfPath = $this->pdf->store('certifications', 'public');
+            $pdfPath = \App\Services\ImageStorageService::upload($this->pdf, 'certifications');
         }
 
         $profile = Profile::first();

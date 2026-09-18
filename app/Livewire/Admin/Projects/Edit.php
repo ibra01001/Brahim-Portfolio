@@ -55,9 +55,9 @@ class Edit extends Component
 
         if ($this->newImage) {
             if ($this->project->image) {
-                Storage::disk('public')->delete($this->project->image);
+                \App\Services\ImageStorageService::delete($this->project->image);
             }
-            $imagePath = $this->newImage->store('projects', 'public');
+            $imagePath = \App\Services\ImageStorageService::upload($this->newImage, 'projects');
         }
 
         $this->project->update([

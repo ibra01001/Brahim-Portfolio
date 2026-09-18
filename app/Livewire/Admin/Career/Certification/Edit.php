@@ -64,9 +64,9 @@ class Edit extends Component
 
         if ($this->pdf) {
             if ($this->certification->pdf_path) {
-                Storage::disk('public')->delete($this->certification->pdf_path);
+                \App\Services\ImageStorageService::delete($this->certification->pdf_path);
             }
-            $data['pdf_path'] = $this->pdf->store('certifications', 'public');
+            $data['pdf_path'] = \App\Services\ImageStorageService::upload($this->pdf, 'certifications');
         }
 
         $this->certification->update($data);

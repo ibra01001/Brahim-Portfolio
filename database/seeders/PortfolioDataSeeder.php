@@ -29,19 +29,31 @@ class PortfolioDataSeeder extends Seeder
                 $sqliteProfile = $stmt ? $stmt->fetch(\PDO::FETCH_ASSOC) : null;
 
                 if ($sqliteProfile) {
+                    $email = $sqliteProfile['email'] ?? 'mohamedremili500@gmail.com';
+
+                    // Get existing profile from PostgreSQL (if any)
+                    $existingProfile = Profile::where('email', $email)->first();
+
+                    // Preserve existing Cloudinary/remote image — don't overwrite with local SQLite path
+                    if ($existingProfile && str_starts_with((string) $existingProfile->image, 'https://')) {
+                        $imageToUse = $existingProfile->image;
+                    } else {
+                        $imageToUse = $sqliteProfile['image'] ?? null;
+                    }
+
                     Profile::updateOrCreate(
-                        ['email' => $sqliteProfile['email'] ?? 'mohamedremili500@gmail.com'],
+                        ['email' => $email],
                         [
-                            'name' => $sqliteProfile['name'] ?? 'BRAHIM REMILI',
-                            'image' => $sqliteProfile['image'] ?? null,
-                            'title' => $sqliteProfile['title'] ?? 'Software Developer',
-                            'bio' => $sqliteProfile['bio'] ?? null,
-                            'github' => $sqliteProfile['github'] ?? 'https://github.com/ibra01001',
+                            'name'     => $sqliteProfile['name'] ?? 'BRAHIM REMILI',
+                            'image'    => $imageToUse,
+                            'title'    => $sqliteProfile['title'] ?? 'Software Developer',
+                            'bio'      => $sqliteProfile['bio'] ?? null,
+                            'github'   => $sqliteProfile['github'] ?? 'https://github.com/ibra01001',
                             'linkedin' => $sqliteProfile['linkedin'] ?? null,
-                            'twitter' => $sqliteProfile['twitter'] ?? null,
+                            'twitter'  => $sqliteProfile['twitter'] ?? null,
                         ]
                     );
-                    $this->command?->info("Profile data migrated from SQLite to PostgreSQL.");
+                    $this->command?->info("Profile data loaded from SQLite database.");
                     return;
                 }
             } catch (\Throwable $e) {
@@ -53,8 +65,8 @@ class PortfolioDataSeeder extends Seeder
         Profile::firstOrCreate(
             ['email' => 'mohamedremili500@gmail.com'],
             [
-                'name' => 'BRAHIM REMILI',
-                'title' => 'Software Developer',
+                'name'   => 'BRAHIM REMILI',
+                'title'  => 'Software Developer',
                 'github' => 'https://github.com/ibra01001',
             ]
         );

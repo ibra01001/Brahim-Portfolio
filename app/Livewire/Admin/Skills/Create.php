@@ -43,7 +43,7 @@ class Create extends Component
 
         $imagePath = null;
         if ($this->image) {
-            $imagePath = $this->image->store('skills', 'public');
+            $imagePath = \App\Services\ImageStorageService::upload($this->image, 'skills');
         }
 
         Skill::create([
