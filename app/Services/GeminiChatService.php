@@ -37,8 +37,8 @@ class GeminiChatService
     {
         return Cache::remember('portfolio_context', 3600, function () {
             $profile = Profile::first();
-            $skills = Skill::where('is_active', true)->orderBy('order')->get();
-            $projects = Project::where('is_active', true)->orderBy('order')->get();
+            $skills = Skill::all();
+            $projects = Project::orderByDesc('featured')->latest()->get();
             $experiences = Experience::where('is_active', true)->orderBy('order')->get();
             $education = Education::where('is_active', true)->orderBy('order')->get();
             $certifications = Certification::where('is_active', true)->orderBy('order')->get();
@@ -78,11 +78,13 @@ class GeminiChatService
                     if ($project->description) {
                         $context .= ": " . substr($project->description, 0, 150);
                     }
-                    if ($project->technologies) {
-                        $context .= " | Tech: {$project->technologies}";
+                    if ($project->category) {
+                        $context .= " | Category: {$project->category}";
                     }
-                    if ($project->url) {
-                        $context .= " | URL: {$project->url}";
+                    if ($project->demo_link) {
+                        $context .= " | Demo: {$project->demo_link}";
+                    } elseif ($project->github_link) {
+                        $context .= " | Code: {$project->github_link}";
                     }
                     $context .= "\n";
                 }
@@ -92,11 +94,11 @@ class GeminiChatService
             if ($experiences->isNotEmpty()) {
                 $context .= "MY WORK EXPERIENCE:\n";
                 foreach ($experiences as $exp) {
-                    $context .= "- {$exp->title} at {$exp->company}";
+                    $context .= "- {$exp->role} at {$exp->company}";
                     if ($exp->start_date) {
-                        $context .= " ({$exp->start_date}";
-                        $context .= $exp->end_date ? " - {$exp->end_date}" : " - Present";
-                        $context .= ")";
+                        $startDate = $exp->start_date instanceof \DateTimeInterface ? $exp->start_date->format('Y-m') : $exp->start_date;
+                        $endDate = $exp->end_date ? ($exp->end_date instanceof \DateTimeInterface ? $exp->end_date->format('Y-m') : $exp->end_date) : "Present";
+                        $context .= " ({$startDate} - {$endDate})";
                     }
                     if ($exp->description) {
                         $context .= ": " . substr($exp->description, 0, 150);
@@ -114,9 +116,9 @@ class GeminiChatService
                         $context .= " at {$edu->institution}";
                     }
                     if ($edu->start_date) {
-                        $context .= " ({$edu->start_date}";
-                        $context .= $edu->end_date ? " - {$edu->end_date}" : " - Present";
-                        $context .= ")";
+                        $startDate = $edu->start_date instanceof \DateTimeInterface ? $edu->start_date->format('Y-m') : $edu->start_date;
+                        $endDate = $edu->end_date ? ($edu->end_date instanceof \DateTimeInterface ? $edu->end_date->format('Y-m') : $edu->end_date) : "Present";
+                        $context .= " ({$startDate} - {$endDate})";
                     }
                     $context .= "\n";
                 }
@@ -130,8 +132,8 @@ class GeminiChatService
                     if ($cert->issuer) {
                         $context .= " by {$cert->issuer}";
                     }
-                    if ($cert->date) {
-                        $context .= " ({$cert->date})";
+                    if ($cert->year) {
+                        $context .= " ({$cert->year})";
                     }
                     $context .= "\n";
                 }
@@ -141,11 +143,7 @@ class GeminiChatService
             if ($languages->isNotEmpty()) {
                 $context .= "LANGUAGES I SPEAK:\n";
                 foreach ($languages as $lang) {
-                    $context .= "- {$lang->name}";
-                    if ($lang->level) {
-                        $context .= " ({$lang->level})";
-                    }
-                    $context .= "\n";
+                    $context .= "- {$lang->name}\n";
                 }
                 $context .= "\n";
             }
@@ -217,14 +215,25 @@ class GeminiChatService
                 ->post($this->getApiUrl() . '?key=' . $this->apiKey, $payload);
 
             if ($response->successful()) {
-                $text = $response->json('candidates.0.content.parts.0.text');
-                if (is_string($text) && trim($text) !== '') {
+                $parts = $response->json('candidates.0.content.parts') ?? [];
+                $text = '';
+                foreach ($parts as $part) {
+                    if (!empty($part['thought'])) {
+                        continue;
+                    }
+                    if (!empty($part['text'])) {
+                        $text .= $part['text'];
+                    }
+                }
+
+                if (trim($text) !== '') {
                     // Limit output length for UI
                     if (mb_strlen($text) > 2000) {
                         $text = mb_substr($text, 0, 2000) . '...';
                     }
                     return trim($text);
                 }
+
                 // Handle blocked by safety
                 $finishReason = $response->json('candidates.0.finishReason');
                 if ($finishReason === 'SAFETY') {

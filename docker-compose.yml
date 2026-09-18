@@ -12,13 +12,15 @@ services:
       - COMPOSER_ALLOW_SUPERUSER=1
       - PORT=8000
     depends_on:
-      - db
-      - redis
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_started
     ports:
       - "8080:8000"
     # Disable production entrypoint for local (avoid chown that breaks host perms)
     entrypoint: []
-    command: sh -c "mkdir -p storage/framework/{sessions,views,cache} storage/app/public bootstrap/cache storage/logs && chmod -R 775 storage bootstrap/cache || true && php artisan package:discover --ansi || true && php artisan migrate --force --no-interaction || true && php artisan storage:link || true && exec php artisan serve --host=0.0.0.0 --port=8000"
+    command: sh -c "mkdir -p storage/framework/{sessions,views,cache} storage/app/public bootstrap/cache storage/logs && chmod -R 775 storage bootstrap/cache || true && php artisan package:discover --ansi || true && php artisan migrate --force --no-interaction || true && php artisan db:seed --class=PortfolioDataSeeder --force || true && if [ ! -L public/storage ]; then php artisan storage:link || true; fi && exec php artisan serve --host=0.0.0.0 --port=8000"
 
   # Use the app container's built-in server for development to avoid nginx mount issues
   # Expose port 8000 and run the Laravel development server inside the container.
@@ -33,6 +35,12 @@ services:
       - db-data:/var/lib/postgresql/data
     ports:
       - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U homestead -d homestead"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
 
   redis:
     image: redis:7
