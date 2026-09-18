@@ -45,20 +45,15 @@
                 <div class="flex flex-col md:flex-row justify-between items-center gap-6">
                     <div class="text-center md:text-left">
                         <h3 class="text-xl font-bold text-[#1A1A1A]" style="font-family: 'Space Grotesk', sans-serif;">
-                            PORTFOLIO.
+                            RMBM.
                         </h3>
-                        <p class="text-[#3D3D3D] mt-2 text-sm">Building digital experiences with passion.</p>
+                        <p class="text-[#3D3D3D] mt-2 text-sm">coolest developer ever ;p</p>
                     </div>
 
-                    <div class="flex space-x-6">
-                        <a href="#" class="text-[#1A1A1A] hover:text-[#FF6B55] transition-colors font-bold">Twitter</a>
-                        <a href="#" class="text-[#1A1A1A] hover:text-[#FF6B55] transition-colors font-bold">GitHub</a>
-                        <a href="#" class="text-[#1A1A1A] hover:text-[#FF6B55] transition-colors font-bold">LinkedIn</a>
-                    </div>
                 </div>
 
                 <div class="border-t border-gray-200 mt-8 pt-8 text-center text-[#3D3D3D] text-sm">
-                    <p>&copy; {{ date('Y') }} Portfolio. Built with Laravel + Livewire + Tailwind.</p>
+                    <p>&copy; {{ date('Y') }} Portfolio. Built by Brahim Remili.</p>
                 </div>
             </div>
         </footer>

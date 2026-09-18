@@ -3,6 +3,8 @@
 namespace App\Livewire;
 
 use App\Models\Profile;
+use App\Models\Skill;
+use App\Models\Project;
 use Livewire\Component;
 use Livewire\Attributes\Layout;
 
@@ -13,6 +15,8 @@ class Home extends Component
     {
         return view('livewire.home', [
             'profile' => Profile::firstOrNew(),
+            'skills' => Skill::all(),
+            'projects' => Project::all(),
         ]);
     }
 }

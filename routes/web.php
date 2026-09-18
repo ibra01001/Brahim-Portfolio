@@ -66,7 +66,5 @@ Route::get('/career', \App\Livewire\Career::class)->name('career');
 Route::get('/', Home::class)->name('home');
 Route::get('/about', About::class)->name('about');
 Route::get('/projects', Projects::class)->name('projects');
-//show page projects
-Route::get('/show/{project}', Projects::class)->name('show');
 Route::get('/contact', Contact::class)->name('contact');
 require __DIR__ . '/auth.php';

@@ -115,17 +115,7 @@
                                                     LIVE
                                                 </a>
                                             @endif
-                                            <!--more details-->
 
-                                            <a href="{{ route('show', $project->id) }}" wire:navigate
-                                                class="flex-1 flex items-center justify-center gap-2 px-4 py-3 border-2 border-[#1A1A1A] bg-[#FF6B55] text-white font-black text-xs uppercase tracking-widest hover:bg-[#1A1A1A] transition-all shadow-[2px_2px_0px_0px_#1A1A1A] hover:shadow-none hover:translate-x-[1px] hover:translate-y-[1px]"
-                                                style="font-family: 'Space Grotesk', sans-serif;">
-                                                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
-                                                        d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                                                </svg>
-                                                MORE
-                                            </a>
 
                                             @if (!empty($project->github_link))
                                                 <a href="{{ $project->github_link }}" target="_blank"

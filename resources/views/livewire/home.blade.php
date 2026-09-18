@@ -1,26 +1,18 @@
-<div class="bg-[#F5F3EF] relative overflow-hidden">
+<div class="bg-[#F5F3EF] min-h-screen relative overflow-hidden">
     <x-site-background />
-    <!-- Hero Section -->
-    <section class="relative overflow-hidden min-h-screen flex items-center">
-        <div class="max-w-7xl mx-auto px-6 py-20 lg:py-32 w-full relative z-10">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
 
-                <!-- Left Side: Text Content -->
-                <div class="space-y-8 text-center lg:text-left">
-                    <!-- Hand-drawn arrow pointing right -->
-                    <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 133.13 60.06"
-                        class="hidden lg:block w-24 h-auto mb-4">
-                        <defs>
-                            <style>
-                                .cls-1 {
-                                    fill: #FF6B55;
-                                }
-                            </style>
-                        </defs>
-                        <path class="cls-1"
-                            d="M-1382.25,1768.26a57.31,57.31,0,0,0-7-9.22c-2.53-2.79-5.26-5.41-8-8.09a1,1,0,0,1,0-1.35,54,54,0,0,1,6.08-4.42c-2.9-4.67-5.94-9.33-9-13.87a69,69,0,0,0-10.53-12.46,35.1,35.1,0,0,0-6.53-4.68,31.21,31.21,0,0,0-7.46-2.9,44.61,44.61,0,0,0-16.14-.51c-7.41,1-14.69,3.09-22,5a131.06,131.06,0,0,0-21.26,7.41,63.88,63.88,0,0,0-9.65,5.61,48.92,48.92,0,0,0-8.2,7.48,39.86,39.86,0,0,0-6,9.28,30.59,30.59,0,0,0-2.75,10.66.55.55,0,0,1-1.1-.06,31.11,31.11,0,0,1,2.6-11.15,40.12,40.12,0,0,1,6.1-9.73,49.48,49.48,0,0,1,8.41-7.82,64.14,64.14,0,0,1,9.89-5.8,129.66,129.66,0,0,1,21.54-7.51c7.32-2,14.64-4,22.23-5.09a46.89,46.89,0,0,1,16.78.46,32.59,32.59,0,0,1,7.92,3,37.26,37.26,0,0,1,6.93,4.87,69.66,69.66,0,0,1,10.89,12.77c1.59,2.29,3.11,4.62,4.62,6.94s3,4.68,4.43,7.07a29.29,29.29,0,0,1,6.59-2.7l0-.07c-.39-.6.43-1.29.9-.73.15.18.27.37.41.55a1,1,0,0,1,.74,1.12c1.77,3.1,2.13,6.91,2.18,10.43a49.62,49.62,0,0,1-1.88,15.23A.91.91,0,0,1-1382.25,1768.26Zm-6.22-22.13a65.51,65.51,0,0,1,7.14,16.81,56.07,56.07,0,0,0,.83-8.59c.08-3.76,0-7.56-1.52-11A63.35,63.35,0,0,0-1388.47,1746.13Zm-1.68.9a40.83,40.83,0,0,0-5,3.29c4.55,4.47,9,8.85,12.76,14.3A66.91,66.91,0,0,0-1390.15,1747Z"
-                            transform="translate(1511.93 -1708.56)"></path>
-                    </svg>
+    <!-- Decorative Top Right Shape matching About design -->
+    <div
+        class="absolute top-0 right-0 w-64 h-64 border-l-4 border-b-4 border-[#1A1A1A] rounded-bl-full bg-[#FF6B55] opacity-5 pointer-events-none">
+    </div>
+
+    <div class="max-w-7xl mx-auto px-6 py-12 lg:py-20 relative z-10">
+
+        <!-- Hero Section -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+
+            <!-- Left Side: Text Content & Brand Statement -->
+            <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
 
                     <div class="space-y-6">
                         <h1 class="text-4xl md:text-6xl lg:text-7xl font-extrabold text-[#1A1A1A] leading-tight"
@@ -47,82 +39,80 @@
                         </div>
                     </div>
 
-                    <p class="text-lg text-[#3D3D3D] leading-relaxed max-w-lg mx-auto lg:mx-0">
-                        {{ $profile->bio ?? 'Passionate developer creating amazing web experiences with modern technologies. I love turning ideas into beautiful, functional applications.' }}
-                    </p>
+                <!-- Bio Paragraph -->
+                <p class="text-base sm:text-lg lg:text-xl text-[#3D3D3D] leading-relaxed max-w-2xl font-medium pt-2"
+                    style="font-family: 'Inter', sans-serif;">
+                    {{ $profile->bio ?? 'Passionate developer creating amazing web experiences with modern technologies. I love turning ideas into beautiful, functional applications.' }}
+                </p>
 
-                    <!-- Social Links -->
-                    <div class="flex flex-wrap justify-center lg:justify-start gap-4 pt-4">
-                        @if($profile?->github)
-                        <a href="{{ $profile->github }}" target="_blank"
-                            class="inline-flex items-center px-6 py-3 bg-white border-2 border-[#1A1A1A] text-[#1A1A1A] font-bold hover:bg-[#1A1A1A] hover:text-white transition-all transform hover:-translate-y-1 hover:rotate-[-1deg]"
-                            style="font-family: 'Space Grotesk', sans-serif;">
-                            <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
-                                <path
-                                    d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
-                            </svg>
-                            GitHub
-                        </a>
-                        @endif
+                <!-- Call to Action Buttons matching About neo-brutalist buttons -->
+                <div class="flex flex-wrap justify-center lg:justify-start gap-4 pt-4">
+                    <!-- Email Me CTA -->
+                    <a href="mailto:{{ $profile->email ?? 'contact@example.com' }}"
+                        class="inline-flex items-center px-6 py-3.5 bg-[#FF6B55] border-2 border-[#1A1A1A] text-white font-bold rounded-lg shadow-[4px_4px_0px_0px_#1A1A1A] hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px] transition-all transform active:scale-95"
+                        style="font-family: 'Space Grotesk', sans-serif;">
+                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                        </svg>
+                        Get In Touch
+                    </a>
 
-                        @if($profile?->linkedin)
-                        <a href="{{ $profile->linkedin }}" target="_blank"
-                            class="inline-flex items-center px-6 py-3 bg-white border-2 border-[#1A1A1A] text-[#1A1A1A] font-bold hover:bg-[#1A1A1A] hover:text-white transition-all transform hover:-translate-y-1 hover:rotate-[-1deg]"
-                            style="font-family: 'Space Grotesk', sans-serif;">
-                            <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
-                                <path
-                                    d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
-                            </svg>
-                            LinkedIn
-                        </a>
-                        @endif
+                    <!-- About Me Page Link -->
+                    <a href="/about" wire:navigate
+                        class="inline-flex items-center px-6 py-3.5 bg-white border-2 border-[#1A1A1A] text-[#1A1A1A] font-bold rounded-lg shadow-[4px_4px_0px_0px_#1A1A1A] hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px] hover:bg-[#1A1A1A] hover:text-white transition-all transform active:scale-95"
+                        style="font-family: 'Space Grotesk', sans-serif;">
+                        About Me
+                        <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                        </svg>
+                    </a>
 
-                        @if($profile?->twitter)
-                        <a href="{{ $profile->twitter }}" target="_blank"
-                            class="inline-flex items-center px-6 py-3 bg-white border-2 border-[#1A1A1A] text-[#1A1A1A] font-bold hover:bg-[#1A1A1A] hover:text-white transition-all transform hover:-translate-y-1 hover:rotate-[-1deg]"
-                            style="font-family: 'Space Grotesk', sans-serif;">
-                            <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
-                                <path
-                                    d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84" />
-                            </svg>
-                            Twitter
-                        </a>
-                        @endif
 
-                        <a href="mailto:{{ $profile->email ?? 'contact@example.com' }}"
-                            class="inline-flex items-center px-6 py-3 bg-[#FF6B55] border-2 border-[#1A1A1A] text-white font-bold hover:bg-[#1A1A1A] transition-all transform hover:-translate-y-1 hover:rotate-[-1deg]"
-                            style="font-family: 'Space Grotesk', sans-serif;">
-                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                            </svg>
-                            Email Me
-                        </a>
-                    </div>
 
-                    <!-- Small decorative elements -->
+                    <!-- GitHub Link -->
+                    @if($profile?->github)
+                    <a href="{{ $profile->github }}" target="_blank"
+                        class="inline-flex items-center p-3.5 bg-white border-2 border-[#1A1A1A] text-[#1A1A1A] font-bold rounded-lg shadow-[4px_4px_0px_0px_#1A1A1A] hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px] hover:bg-[#1A1A1A] hover:text-white transition-all"
+                        title="GitHub">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                        </svg>
+                    </a>
+                    @endif
 
+                    <!-- LinkedIn Link -->
+                    @if($profile?->linkedin)
+                    <a href="{{ $profile->linkedin }}" target="_blank"
+                        class="inline-flex items-center p-3.5 bg-white border-2 border-[#1A1A1A] text-[#1A1A1A] font-bold rounded-lg shadow-[4px_4px_0px_0px_#1A1A1A] hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px] hover:bg-[#1A1A1A] hover:text-white transition-all"
+                        title="LinkedIn">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+                        </svg>
+                    </a>
+                    @endif
                 </div>
 
-                <!-- Right Side: Profile Image with Creative Frame -->
-                <div class="relative">
-                    <div class="relative inline-block">
-                        <!-- Decorative frame elements -->
-                        <div class="absolute -top-4 -left-4 w-16 h-16 border-t-4 border-l-4 border-[#FF6B55]"></div>
-                        <div class="absolute -bottom-4 -right-4 w-16 h-16 border-b-4 border-r-4 border-[#1A1A1A]"></div>
+            </div>
 
-                        <!-- Main image container -->
-                        <div class="relative bg-white border-4 border-[#1A1A1A] p-2">
-                            <img src="{{ image_url($profile->image, 'https://via.placeholder.com/400x500/F5F3EF/1A1A1A?text=Your+Photo') }}"
-                                alt="{{ $profile->name }}" class="w-full max-w-md h-auto object-cover">
-                        </div>
+            <!-- Right Side: Profile Image with Creative Frame -->
+            <div class="lg:col-span-5 relative flex justify-center lg:justify-end mt-8 lg:mt-0">
+                <div class="relative inline-block">
+                    <!-- Decorative frame elements -->
+                    <div class="absolute -top-4 -left-4 w-16 h-16 border-t-4 border-l-4 border-[#FF6B55]"></div>
+                    <div class="absolute -bottom-4 -right-4 w-16 h-16 border-b-4 border-r-4 border-[#1A1A1A]"></div>
 
-                        <!-- Floating decorative elements -->
-                        <div class="absolute -top-8 -right-8 w-12 h-12 bg-[#FF6B55] rounded-full border-2 border-[#1A1A1A] transition-transform hover:scale-110"
-                            style="animation: bounce 2s infinite;"></div>
-                        <div class="absolute top-1/2 -left-12 w-8 h-8 bg-white border-2 border-[#1A1A1A] transform rotate-45 transition-transform hover:scale-110"
-                            style="animation: bounce 2s infinite 0.5s;"></div>
+                    <!-- Main image container -->
+                    <div class="relative bg-white border-4 border-[#1A1A1A] p-2">
+                        <img src="{{ image_url($profile->image, 'https://via.placeholder.com/400x500/F5F3EF/1A1A1A?text=Your+Photo') }}"
+                            alt="{{ $profile->name }}" class="w-full max-w-md h-auto object-cover">
                     </div>
+
+                    <!-- Floating decorative elements -->
+                    <div class="absolute -top-8 -right-8 w-12 h-12 bg-[#FF6B55] rounded-full border-2 border-[#1A1A1A] transition-transform hover:scale-110"
+                        style="animation: bounce 2s infinite;"></div>
+                    <div class="absolute top-1/2 -left-12 w-8 h-8 bg-white border-2 border-[#1A1A1A] transform rotate-45 transition-transform hover:scale-110"
+                        style="animation: bounce 2s infinite 0.5s;"></div>
 
                     <!-- Code snippet decoration -->
                     <div
@@ -138,12 +128,18 @@
                         </div>
                     </div>
                 </div>
-
             </div>
 
+        </div>
+
+
+        <!-- Chatbot Section Wrapper: Edge-to-Edge on Mobile, Seamless on Desktop -->
+        <div class="mt-16 sm:mt-24 -mx-6 sm:mx-0">
             <livewire:Chatbot />
         </div>
-        <!-- Large decorative elements -->
+
+    </div>
+            <!-- Large decorative elements -->
         <div
             class="absolute top-20 right-10 w-64 h-64 border-4 border-[#FF6B55] rounded-full opacity-10 pointer-events-none">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600">
@@ -294,37 +290,22 @@
                     opacity="0.3"></path>
             </svg>
         </div>
-    </section>
+    
 </div>
 
+
 @push('styles')
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link
-    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700;800&family=Inter:wght@400;500&display=swap"
-    rel="stylesheet">
-
-<style>
-    @keyframes bounce {
-
-        0%,
-        100% {
-            transform: translateY(0);
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700;800&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
         }
-
-        50% {
-            transform: translateY(-10px);
-        }
-    }
-
-    @media screen and (max-width: 768px) {
-        .space-y-6 {
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
-    }
-</style>
+    </style>
 @endpush
