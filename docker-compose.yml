@@ -16,9 +16,9 @@ services:
       - redis
     ports:
       - "8080:8000"
-    # Bypass production entrypoint chown for local bind-mount (keeps host perms as brahim:brahim)
-    entrypoint: ["sh", "-c", "mkdir -p storage/framework/{sessions,views,cache} storage/app/public bootstrap/cache storage/logs && chmod -R 775 storage bootstrap/cache || true && php artisan package:discover --ansi || true && php artisan migrate --force --no-interaction || true && php artisan storage:link || true && exec php artisan serve --host=0.0.0.0 --port=8000"]
-    command: []
+    # Disable production entrypoint for local (avoid chown that breaks host perms)
+    entrypoint: []
+    command: sh -c "mkdir -p storage/framework/{sessions,views,cache} storage/app/public bootstrap/cache storage/logs && chmod -R 775 storage bootstrap/cache || true && php artisan package:discover --ansi || true && php artisan migrate --force --no-interaction || true && php artisan storage:link || true && exec php artisan serve --host=0.0.0.0 --port=8000"
 
   # Use the app container's built-in server for development to avoid nginx mount issues
   # Expose port 8000 and run the Laravel development server inside the container.
