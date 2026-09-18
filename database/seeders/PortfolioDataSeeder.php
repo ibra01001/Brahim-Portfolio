@@ -61,13 +61,15 @@ class PortfolioDataSeeder extends Seeder
             }
         }
 
-        // Fallback default profile if not exists
+        // Fallback default profile if not exists or if SQLite is not available (e.g. Render production)
         Profile::firstOrCreate(
             ['email' => 'mohamedremili500@gmail.com'],
             [
-                'name'   => 'BRAHIM REMILI',
-                'title'  => 'Software Developer',
-                'github' => 'https://github.com/ibra01001',
+                'name'     => 'BRAHIM REMILI',
+                'image'    => 'https://res.cloudinary.com/deveventhub/image/upload/v1789744789/profile/ox8jodicc6eez8tn7wap.jpg',
+                'title'    => 'Software Developer',
+                'github'   => 'https://github.com/ibra01001',
+                'linkedin' => 'https://www.linkedin.com/in/brahim-mohamed-mokhtar-remili-15b907370/',
             ]
         );
     }

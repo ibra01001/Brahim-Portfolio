@@ -13,7 +13,11 @@ class ImageStorageService
      */
     public static function upload($file, string $folder = 'portfolio'): string
     {
-        if (config('cloudinary.cloud_url') || (env('CLOUDINARY_CLOUD_NAME') && env('CLOUDINARY_API_KEY'))) {
+        $cloudUrl = config('cloudinary.cloud_url');
+        $hasCloudinary = (!empty($cloudUrl) && !str_starts_with($cloudUrl, 'cloudinary://:@'))
+            || (!empty(config('filesystems.disks.cloudinary.cloud')) && !empty(config('filesystems.disks.cloudinary.key')));
+
+        if ($hasCloudinary) {
             try {
                 $filePath = is_string($file) ? $file : $file->getRealPath();
                 $result = Cloudinary::uploadApi()->upload($filePath, [
