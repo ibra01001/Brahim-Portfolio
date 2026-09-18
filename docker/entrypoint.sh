@@ -22,7 +22,10 @@ su www-data -s /bin/bash -c "php artisan package:discover --ansi || true"
 
 # Ensure storage permissions (Render filesystem is ephemeral)
 mkdir -p storage/framework/{sessions,views,cache} storage/app/public bootstrap/cache storage/logs
-chown -R www-data:www-data storage bootstrap/cache || true
+# On local bind-mount (APP_ENV=local), chown would break host permissions – skip it
+if [ "${APP_ENV:-production}" != "local" ]; then
+    chown -R www-data:www-data storage bootstrap/cache || true
+fi
 chmod -R 775 storage bootstrap/cache || true
 
 # Create storage symlink if not exists (idempotent)
@@ -46,8 +49,10 @@ if [ -z "$APP_KEY" ]; then
     echo "WARNING: APP_KEY is empty. Set it in Render environment variables!"
 fi
 
-# Fix ownership again after artisan commands
-chown -R www-data:www-data storage bootstrap/cache || true
+# Fix ownership again after artisan commands (skip on local bind-mount)
+if [ "${APP_ENV:-production}" != "local" ]; then
+    chown -R www-data:www-data storage bootstrap/cache || true
+fi
 
 echo "Starting Apache on port $PORT..."
 exec "$@"
