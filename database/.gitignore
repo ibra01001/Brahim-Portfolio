@@ -1,1 +1,5 @@
+# Legacy SQLite artifacts - project now uses PostgreSQL (see docker-compose.yml db service).
+# Keep ignored to prevent accidental commits of old database.sqlite or test dumps.
 *.sqlite*
+*.sqlite-journal
+*.sqlite-wal

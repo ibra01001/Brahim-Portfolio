@@ -34,6 +34,41 @@ if [ ! -L public/storage ]; then
     su -p www-data -s /bin/bash -c "php artisan storage:link || true"
 fi
 
+# Wait for PostgreSQL if using pgsql (handles both DB_* and DATABASE_URL on Render)
+if [ "${DB_CONNECTION:-}" = "pgsql" ] || [ -n "${DATABASE_URL:-}" ] || [ -n "${DB_URL:-}" ]; then
+    echo "Waiting for PostgreSQL to be ready..."
+    # Determine connection params; prefer DATABASE_URL/DB_URL if present (Render)
+    DB_URL_VAL="${DATABASE_URL:-${DB_URL:-}}"
+    if [ -n "$DB_URL_VAL" ]; then
+        PGHOST=$(php -r 'echo parse_url($argv[1], PHP_URL_HOST) ?: "";' "$DB_URL_VAL" 2>/dev/null || echo "")
+        PGPORT=$(php -r 'echo parse_url($argv[1], PHP_URL_PORT) ?: "";' "$DB_URL_VAL" 2>/dev/null || echo "")
+        PGUSER=$(php -r 'echo parse_url($argv[1], PHP_URL_USER) ?: "";' "$DB_URL_VAL" 2>/dev/null || echo "")
+        PGDATABASE=$(php -r 'echo ltrim(parse_url($argv[1], PHP_URL_PATH) ?: "", "/");' "$DB_URL_VAL" 2>/dev/null || echo "")
+        [ -z "$PGHOST" ] && PGHOST="${DB_HOST:-127.0.0.1}"
+        [ -z "$PGPORT" ] && PGPORT="${DB_PORT:-5432}"
+        [ -z "$PGUSER" ] && PGUSER="${DB_USERNAME:-portfolio}"
+        [ -z "$PGDATABASE" ] && PGDATABASE="${DB_DATABASE:-portfolio}"
+    else
+        PGHOST="${DB_HOST:-127.0.0.1}"
+        PGPORT="${DB_PORT:-5432}"
+        PGUSER="${DB_USERNAME:-portfolio}"
+        PGDATABASE="${DB_DATABASE:-portfolio}"
+    fi
+    echo "Checking Postgres at $PGHOST:$PGPORT (db=$PGDATABASE user=$PGUSER)..."
+    MAX_TRIES=30
+    TRIES=0
+    until pg_isready -h "$PGHOST" -p "$PGPORT" -U "$PGUSER" -d "$PGDATABASE" >/dev/null 2>&1 || pg_isready -h "$PGHOST" -p "$PGPORT" >/dev/null 2>&1; do
+        TRIES=$((TRIES+1))
+        if [ $TRIES -ge $MAX_TRIES ]; then
+            echo "WARNING: Postgres not ready after $MAX_TRIES attempts - proceeding to migrate anyway (will retry)."
+            break
+        fi
+        echo "Postgres not ready yet (attempt $TRIES/$MAX_TRIES) - waiting 2s..."
+        sleep 2
+    done
+    echo "Postgres ready (or timeout) - continuing."
+fi
+
 # Run migrations (safe for production)
 echo "Running migrations..."
 su -p www-data -s /bin/bash -c "php artisan migrate --force --no-interaction" || echo "Migrations failed or no DB - will retry on next deploy"

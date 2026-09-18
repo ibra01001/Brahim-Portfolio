@@ -16,6 +16,8 @@ RUN composer install --no-dev --no-interaction --prefer-dist --optimize-autoload
 FROM php:8.2-apache
 
 # Install system dependencies and PHP extensions
+# pdo_pgsql + postgresql-client are required for production (pgsql).
+# pdo_sqlite + libsqlite3-dev/sqlite3 are kept for phpunit :memory: tests; remove if tests are migrated to pgsql.
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
         git \
@@ -25,6 +27,7 @@ RUN apt-get update \
         libzip-dev \
         zlib1g-dev \
         libpq-dev \
+        postgresql-client \
         libsqlite3-dev \
         sqlite3 \
         libpng-dev \

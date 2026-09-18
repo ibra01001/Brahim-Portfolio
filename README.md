@@ -83,8 +83,8 @@ This design choice makes the portfolio stand out from traditional, overly minima
 - Minimal JavaScript (only where necessary)
 
 ### Database
-- SQLite (development)
-- MySQL compatible (production)
+- PostgreSQL 15 (local via Docker Compose `db` service, production on Render `portfolio-db`)
+- SQLite `:memory:` only for fast PHPUnit tests (`phpunit.xml`); all app code uses `pgsql`
 
 ### Tooling
 - Vite
@@ -114,16 +114,31 @@ This makes the project **scalable**, **maintainable**, and **future-proof**.
 
 ## ⚙️ Installation (Local)
 
+**With Docker (Recommended — PostgreSQL):**
 ```bash
 git clone https://github.com/your-username/your-repo.git
 cd your-repo
 
+# .env is already pgsql (DB_HOST=db for Docker); .env.docker is the Docker source
+docker compose up --build
+# -> Postgres 15 at db:5432, app at http://localhost:8080
+# Migrations + PortfolioDataSeeder run automatically on container start
+
+# For local artisan outside Docker (optional):
+# cp .env.example .env  # then set DB_HOST=127.0.0.1 DB_DATABASE=portfolio
+# php artisan migrate --seed
+```
+
+**Without Docker (local Postgres required):**
+```bash
 composer install
 npm install
 npm run build
 
-cp .env.example .env
+cp .env.example .env        # already DB_CONNECTION=pgsql
 php artisan key:generate
+# Ensure Postgres 15 is running and DB portfolio/portfolio/secret exists:
+# createdb -h 127.0.0.1 -U portfolio portfolio  (or use docker compose db)
 php artisan migrate --seed
 
 php artisan serve
