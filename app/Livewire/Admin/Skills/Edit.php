@@ -19,7 +19,7 @@ class Edit extends Component
     public $name = '';
 
     #[Validate('boolean')]
-    public $show_level;
+    public $show_level = false;
 
     public $level;
 
@@ -39,7 +39,7 @@ class Edit extends Component
         $this->level = $skill->level ?? 'Intermediate';
         $this->category = $skill->category;
         $this->description = $skill->description;
-        $this->show_level = $skill->show_level;
+        $this->show_level = (bool) ($skill->show_level ?? false);
     }
 
     public function save()

@@ -11,7 +11,7 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::table('skills', function (Blueprint $table) {
-            $table->boolean('show_level')->default(true)->after('level');
+            $table->boolean('show_level')->default(false)->after('level');
         });
     }
 

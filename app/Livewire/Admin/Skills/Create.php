@@ -18,7 +18,7 @@ class Create extends Component
     public $name = '';
 
     #[Validate('boolean')]
-    public $show_level = true;
+    public $show_level = false;
 
     public $level = 'Intermediate';
 
