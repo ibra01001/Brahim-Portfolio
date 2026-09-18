@@ -1,0 +1,9 @@
+vendor
+node_modules
+.git
+.env
+storage
+tests
+.vscode
+docker-compose.yml
+Dockerfile
