@@ -67,7 +67,7 @@ class Edit extends Component
             'name' => $this->name,
             'image' => $imagePath ?? $this->profile->image,
             'title' => $this->title,
-            'bio' => $this->bio,
+            'bio' => $this->bio ?? '',
             'email' => $this->email,
             'github' => $this->github,
             'linkedin' => $this->linkedin,

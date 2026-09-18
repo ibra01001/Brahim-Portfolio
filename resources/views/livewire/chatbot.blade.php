@@ -185,8 +185,7 @@
                     <!-- Messages -->
                     <div
                         class="flex-1 overflow-y-auto p-5 sm:p-7 space-y-5 bg-[#F5F3EF] chat-messages"
-                        id="messages-container"
-                        wire:poll.3s>
+                        id="messages-container">
 
                         @forelse($conversation as $index => $msg)
                         <div class="flex {{ $msg['role'] === 'user' ? 'justify-end' : 'justify-start' }} msg-fadein">
@@ -294,8 +293,10 @@
                                 <input
                                     type="text"
                                     wire:model="message"
+                                    wire:keydown.enter="send"
                                     id="chat-input"
-                                    placeholder="Ask me anything..."
+                                    placeholder="Ask me anything... (max 500 chars)"
+                                    maxlength="500"
                                     class="flex-1 min-w-0 px-4 py-3.5 border-2 border-[#1A1A1A] focus:outline-none focus:border-[#FF6B55] transition-colors duration-150 text-[#1A1A1A] placeholder-[#3D3D3D]/30 bg-[#F5F3EF] text-sm font-medium"
                                     style="font-family: 'Inter', sans-serif;"
                                     autocomplete="off"
@@ -318,9 +319,12 @@
                                 </button>
                             </div>
 
+                            @error('message')
+                                <p class="text-xs text-red-600 mt-2 bg-red-50 border border-red-200 px-3 py-2" style="font-family: 'Inter', sans-serif;">{{ $message }}</p>
+                            @enderror
                             <p class="text-[11px] text-[#3D3D3D]/35 mt-2.5 hidden sm:block"
                                 style="font-family: 'Inter', sans-serif;">
-                                Press Enter to send &bull; Powered by Gemini
+                                Press Enter to send &bull; Powered by Gemini &bull; <span x-text="document.getElementById('chat-input')?.value.length || 0"></span>/500
                             </p>
                         </form>
                     </div>
