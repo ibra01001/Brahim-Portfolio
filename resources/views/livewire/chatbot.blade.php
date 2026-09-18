@@ -5,13 +5,7 @@
 
         <!-- Section Header -->
         <div class="mb-8 sm:mb-10">
-            <div class="inline-flex items-center gap-2.5 px-4 py-1.5 bg-white border-2 border-[#1A1A1A] rounded-md shadow-[3px_3px_0px_0px_#1A1A1A] mb-4">
-                <div class="w-2.5 h-2.5 rounded-full bg-[#FF6B55] ai-soft-pulse flex-shrink-0"></div>
-                <span class="text-[11px] font-black uppercase tracking-[0.18em] text-[#1A1A1A]"
-                    style="font-family: 'Space Grotesk', sans-serif;">
-                    AI Companion
-                </span>
-            </div>
+
 
             <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
                 <div>
