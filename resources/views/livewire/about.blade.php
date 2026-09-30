@@ -241,7 +241,7 @@
                     class="bg-white border-2 border-[#1A1A1A] p-8 rounded-lg shadow-[4px_4px_0px_0px_rgba(26,26,26,1)] transition-transform hover:-translate-y-1">
                     <h3 class="text-2xl font-bold text-[#1A1A1A] mb-4"
                         style="font-family: 'Space Grotesk', sans-serif;">
-                        <span class="text-[#FF6B55]">#</span> Who I Am
+                        <span class="text-[#FF6B55]">#</span> Who Am i
                     </h3>
                     <p class="text-lg text-[#3D3D3D] leading-relaxed mb-6" style="font-family: 'Inter', sans-serif;">
                         My full name is Remili Mohamed Brahim Mokhtar.
