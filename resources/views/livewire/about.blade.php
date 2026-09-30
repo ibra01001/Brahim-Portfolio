@@ -247,7 +247,7 @@
                         My full name is Remili Mohamed Brahim Mokhtar.
                     </p>
                     <p class="text-lg text-[#3D3D3D] leading-relaxed" style="font-family: 'Inter', sans-serif;">
-Software Engineer and Web Developer with two years of training and practical experience in computer science. Skilled in Full-Stack development, system architecture, and computer networking. Experienced in project management, UI/UX design, and IT solutions development. Strongly interested in real-time communications, security, encryption, and privacy protection.
+                       Software Engineer and Web Developer with two years of training and practical experience in computer science. Skilled in Full-Stack development, system architecture, and computer networking. Experienced in project management, UI/UX design, and IT solutions development. Strongly interested in real-time communications, security, encryption, and privacy protection.
                 </div>
             </div>
 
