@@ -116,7 +116,7 @@
                         </svg>
                         <h4 class="font-bold text-[#1A1A1A]" style="font-family: 'Space Grotesk', sans-serif;">Email Me
                         </h4>
-                        <p class="text-[#3D3D3D] text-sm mt-1">contact@example.com</p>
+                        <p class="text-[#3D3D3D] text-sm mt-1">mohamedremili500@gmail.com</p>
                     </div>
 
                     <div
